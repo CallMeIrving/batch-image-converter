@@ -21,14 +21,15 @@ PixelFlex 是一款高性能、全本地运行的批量图片处理工具。它�
 
 ## 🚀 本地开发
 
-由于本项目采用了原生的 ES Modules 导入方式（importmap），您只需要一个简单的本地静态服务器即可运行：
 
-1. 克隆项目：
+1. 安装依赖：
    ```bash
-   git clone https://github.com/YOUR_USERNAME/pixelflex.git
+   npm install
+   npm run dev
+或
+   pnpm i
+   pnpm dev
    ```
-2. 使用 VS Code 的 `Live Server` 插件或任何静态服务器（如 `npx serve .`）打开项目根目录。
-
 ## 📄 开源协议
 
 MIT License.
