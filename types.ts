@@ -12,6 +12,8 @@ export enum AppMode {
   COMPRESS = 'compress'
 }
 
+export type Language = 'zh' | 'en';
+
 export type ConversionStatus = 'idle' | 'processing' | 'completed' | 'error';
 
 export interface ImageFile {

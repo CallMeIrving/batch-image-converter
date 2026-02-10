@@ -1,12 +1,15 @@
 
 import React, { useCallback } from 'react';
 import { Upload, Image as ImageIcon } from 'lucide-react';
+import { useTranslation } from '../App.tsx';
 
 interface UploaderProps {
   onFilesSelected: (files: File[]) => void;
 }
 
 const Uploader: React.FC<UploaderProps> = ({ onFilesSelected }) => {
+  const { t } = useTranslation();
+
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -15,7 +18,6 @@ const Uploader: React.FC<UploaderProps> = ({ onFilesSelected }) => {
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    // Fix: Add explicit File type to filter parameter to avoid 'unknown' type error
     const files = Array.from(e.dataTransfer.files).filter((f: File) => f.type.startsWith('image/'));
     if (files.length > 0) {
       onFilesSelected(files);
@@ -33,7 +35,7 @@ const Uploader: React.FC<UploaderProps> = ({ onFilesSelected }) => {
     <div
       onDragOver={handleDragOver}
       onDrop={handleDrop}
-      className="relative group border-2 border-dashed border-slate-700 hover:border-sky-500/50 bg-slate-800/20 transition-all rounded-2xl p-12 text-center cursor-pointer overflow-hidden"
+      className="relative group border-2 border-dashed border-slate-700 hover:border-sky-500/50 bg-slate-800/20 transition-all duration-500 rounded-3xl p-16 text-center cursor-pointer overflow-hidden"
     >
       <input
         type="file"
@@ -44,24 +46,23 @@ const Uploader: React.FC<UploaderProps> = ({ onFilesSelected }) => {
       />
       
       <div className="relative z-0">
-        <div className="mb-4 inline-flex items-center justify-center p-4 bg-sky-500/10 rounded-full group-hover:scale-110 transition-transform duration-300">
-          <Upload className="w-10 h-10 text-sky-500" />
+        <div className="mb-6 inline-flex items-center justify-center p-6 bg-sky-500/10 rounded-2xl group-hover:scale-110 group-hover:bg-sky-500/20 transition-all duration-500">
+          <Upload className="w-12 h-12 text-sky-400" />
         </div>
-        <h2 className="text-2xl font-bold mb-2 text-slate-100">Drop your images here</h2>
-        <p className="text-slate-400 max-w-sm mx-auto">
-          Support batch processing for JPG, PNG, WebP, and more. Max file size: 20MB.
+        <h2 className="text-3xl font-bold mb-3 text-white tracking-tight">{t('uploader_title')}</h2>
+        <p className="text-slate-400 max-w-sm mx-auto text-lg leading-relaxed">
+          {t('uploader_desc')}
         </p>
       </div>
 
-      <div className="mt-8 flex items-center justify-center gap-4 text-xs font-medium text-slate-500">
-        <span className="px-3 py-1 bg-slate-800 rounded-full">BATCH CONVERSION</span>
-        <span className="px-3 py-1 bg-slate-800 rounded-full">SMART OPTIMIZATION</span>
-        <span className="px-3 py-1 bg-slate-800 rounded-full">PRIVACY FIRST</span>
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+        <span className="px-4 py-1.5 bg-slate-900 border border-slate-800 rounded-full">{t('uploader_tag_no_server')}</span>
+        <span className="px-4 py-1.5 bg-slate-900 border border-slate-800 rounded-full">{t('uploader_tag_svg')}</span>
+        <span className="px-4 py-1.5 bg-slate-900 border border-slate-800 rounded-full">{t('uploader_tag_speed')}</span>
       </div>
 
-      {/* Background decoration */}
       <div className="absolute top-0 right-0 p-8 opacity-5">
-        <ImageIcon size={160} className="rotate-12" />
+        <ImageIcon size={180} className="rotate-12" />
       </div>
     </div>
   );
