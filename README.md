@@ -26,7 +26,10 @@ PixelFlex 是一款高性能、全本地运行的批量图片处理工具。它�
    ```bash
    npm install
    npm run dev
-或
+   ```
+   或
+
+   ```bash
    pnpm i
    pnpm dev
    ```
